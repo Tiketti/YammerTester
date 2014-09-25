@@ -1,0 +1,11 @@
+{
+  "name": "YammerTester",
+  "author": "Tiketti",
+  "description": "Testing Yammer API + node.js + angularjs",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angularjs": "",
+    "express": ""
+  }
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app>
+	<head>
+		<script src="controller.js"></script>
+		<!-- Below file includes reference to Yammer SDK. excluded from this file to keep app id secret -->
+		<link rel="import" href="yammersdkinclude.html">
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.js"></script>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+		<link href="main.css" rel="stylesheet" />	
+
+		<title>Yammer tester</title>
+	</head>
+	<body ng-controller="YCtrl">
+		<div class="container theme-showcase content" role="main">
+
+			<div class="yammerButton">
+				<span id="yammer-login"></span>
+				<script>
+					// console.log('appid = ' + $scope.appid);
+					// yam.connect.loginButton('#yammer-login', function (resp) { 
+					// 	if (resp.authResponse) { 
+					// 		document.getElementById('yammer-login').innerHTML = 'Welcome to Yammer!'; 
+
+					// 		yam.getLoginStatus(
+					// 		  function(response) {
+					// 		    if (response.authResponse) {
+					// 		      	console.dir("logged in");
+					// 		        console.dir(response); //print user information to the console
+					// 		      }
+					// 		    else { //authResponse = false if the user is not logged in, or is logged in but hasn't authorized your app yet
+					// 		      console.dir("logged out");
+					// 		    }
+					// 		  }
+					// 		);
+
+					// 	} 
+					// }); 
+				</script>
+			</div>
+
+			<button type="button" class="btn btn-lg btn-success" ng-click="readMessages()">Get messages from Yammer</button>
+
+			<div class="messages">
+				<div ng-repeat="msg in messages" class="msgContainer">
+					<span class="msgLabel">Viesti: </span><span class="msgText">{{msg.content_excerpt}}</span>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+</html>

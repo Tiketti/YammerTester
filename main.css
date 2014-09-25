@@ -1,0 +1,23 @@
+<style>
+	body {
+		background-color: #cdd4da;
+		font-family: : Helvetica, sans-serif;
+		margin: 5%;	
+	}
+	div.messages {
+		position: relative;
+		margin-top: 20px;
+	}
+	div.msgContainer {
+		margin: 5px;
+	}
+	.msgLabel {
+		font-weight: bolder;
+	}
+	.msgText {
+
+	}	
+	div.yammerButton {
+		margin-bottom: 20px;
+	}
+</style>
