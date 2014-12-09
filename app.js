@@ -33,12 +33,46 @@ app.get('/api/menus/get/:name?', function (req, res){
 
         	if(!err && response.statusCode == 200) {
         		var $ = cheerio.load(body);
+            // console.dir('item-page: ' + $('.item-page'));
+            // console.dir('item-page.each: ' + $('p', '.item-page')); //.each(function(p) {
+            //   console.dir(p);
+            // }));
 
+            var dishes = $('p', '.item-page');
+
+            // bless this mess --> FIX
+            var currentDate = new Date();
+            var paddedDate = ('0' + currentDate.getDate()).slice(-2) + '.' + ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            var tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
+            var paddedTomorrowDate = ('0' + tomorrowDate.getDate()).slice(-2) + '.' + ('0' + (tomorrowDate.getMonth() + 1)).slice(-2) + '.';
+            console.dir(paddedDate + '  --  ' + paddedTomorrowDate);
+
+            var matches = [];
+            dishes.each(function(i, elem) {
+              console.dir($(this).text());
+
+              //TODO: replace hardcoded date
+              if($(this).text().indexOf(paddedDate) >= 0) {
+                  // matches
+                  matches.push($(this).text());
+
+                  // loop til you find tomorrow's date. or known end
+                  var sibling = $(this).next();
+
+                  while(sibling.text().indexOf(paddedTomorrowDate) < 0 && sibling.text().indexOf('_____________') < 0 ) {
+                    matches.push(sibling.text());
+                    sibling = sibling.next();
+                  }
+              }
+            });
+
+            console.dir('matches: ' + matches);
+
+            //TODO: try to parse price
             var courses = [];
-            // result.courses.forEach(function (item) {
-              courses.push( { name: 'Ruoka 1', price: '9,90' } );
-              courses.push( { name: 'Ruoka 2' } );
-            // });
+            matches.forEach(function (item) {
+              courses.push( { name: item } );
+            });
 
             callback(courses);
         	}
