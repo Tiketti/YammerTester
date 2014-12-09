@@ -17,7 +17,9 @@ app.get('/api', function (req, res) {
 });
 
 // returns menus for all known restaurants
-app.get('/api/menus/get', function (req, res){
+app.get('/api/menus/get/:name?', function (req, res){
+
+  console.dir('named parameter: ' + req.params.name);
 
   //TODO: separate into a module?
 
@@ -75,13 +77,16 @@ app.get('/api/menus/get', function (req, res){
     }
   ];
 
-  restaurants.forEach(function(item) {
-    console.dir('in forEach loop');
+  // look for only one restaurant if a parameter was supplied
+  if(req.params.name != null) {
+    restaurants = restaurants.filter(function (item) {
+      return item.name == req.params.name;
+    });
+  }
 
+  restaurants.forEach(function(item) {
     item.parserFunction(function parserFinished (courses) {
         menus.push( { restaurant: item.name, courses: courses } );
-
-        console.dir('parserFinished. result: ' + courses);
         returnIfReady();
     });
   });
