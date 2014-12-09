@@ -2,21 +2,21 @@
 	body {
 		background-color: #cdd4da;
 		font-family: : Helvetica, sans-serif;
-		margin: 5%;	
+		margin: 5%;
 	}
-	div.messages {
+	div.menus {
 		position: relative;
 		margin-top: 20px;
 	}
-	div.msgContainer {
+	div.menuContainer {
 		margin: 5px;
 	}
-	.msgLabel {
+	.menuLabel {
 		font-weight: bolder;
 	}
 	.msgText {
 
-	}	
+	}
 	div.yammerButton {
 		margin-bottom: 20px;
 	}
