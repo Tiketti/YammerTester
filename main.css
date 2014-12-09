@@ -20,4 +20,13 @@
 	div.yammerButton {
 		margin-bottom: 20px;
 	}
+
+	.coursePrice {
+		margin: 5px;
+		font-size: smaller;
+		color: #ffffff;
+		background-color: #61c91c;
+		padding: 1px 3px 1px 3px;
+		border-radius: 4px;
+	}
 </style>

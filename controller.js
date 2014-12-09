@@ -7,13 +7,13 @@ function YCtrl($scope, $http) {
 		console.dir('read menus');
 
 		$http.get('api/menus/get').success(function(data) {
-			console.dir('data length: ' + data.length);
-			console.log('data stringified: ' + JSON.stringify(data, null, 4));
+			// console.dir('data length: ' + data.length);
+			// console.log('data stringified: ' + JSON.stringify(data, null, 4));
 
 			// console.log('json stringified: ' + JSON.stringify(json, null, 4));
 			// console.dir('json: ' + json);
-			console.dir('json.restaurant: ' + data[0].restaurant);
-			console.dir('json.menu: ' + data[0].menu);
+			// console.dir('json.restaurant: ' + data[0].restaurant);
+			// console.dir('json.courses: ' + data[0].courses);
 
 			$scope.menus = data;
 		});

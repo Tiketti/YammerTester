@@ -22,7 +22,8 @@
 
 			<div class="menus">
 				<div ng-repeat="menu in menus" class="menuContainer">
-					<div class="menuLabel">{{menu.restaurant}} </div><div class="msgText">{{menu.menu}}</div>
+					<div class="menuLabel">{{menu.restaurant}} </div>
+					<div ng-repeat="course in menu.courses" class="msgText">{{course.name}}<span ng-show="course.price != null" class="coursePrice">&nbsp;{{course.price}}&nbsp;&euro;</span></div>
 				</div>
 			</div>
 
