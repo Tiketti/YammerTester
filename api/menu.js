@@ -20,23 +20,22 @@ exports.getMenus = function (restaurantName, callback) {
 
           var dishes = $('p', '.item-page');
 
-          // bless this mess --> FIX
           var currentDate = new Date();
-          var paddedDate = ('0' + currentDate.getDate()).slice(-2) + '.' + ('0' + (currentDate.getMonth() + 1)).slice(-2);
-          var tomorrowDate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-          var paddedTomorrowDate = ('0' + tomorrowDate.getDate()).slice(-2) + '.' + ('0' + (tomorrowDate.getMonth() + 1)).slice(-2) + '.';
-          console.dir(paddedDate + '  --  ' + paddedTomorrowDate);
+          var paddedDate = padDate(currentDate);
+
+          var tomorrowDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000);
+          var paddedTomorrowDate = padDate(tomorrowDate);
 
           var matches = [];
           dishes.each(function(i, elem) {
-            console.dir($(this).text());
+            // console.dir($(this).text());
 
             //TODO: replace hardcoded date
             if($(this).text().indexOf(paddedDate) >= 0) {
               // matches
               matches.push($(this).text());
 
-              // loop til you find tomorrow's date. or known end
+              // loop til you find tomorrow's date or known end character sequence
               var sibling = $(this).next();
 
               while(sibling.text().indexOf(paddedTomorrowDate) < 0 && sibling.text().indexOf('_____________') < 0 ) {
@@ -45,8 +44,6 @@ exports.getMenus = function (restaurantName, callback) {
               }
             }
           });
-
-          console.dir('matches: ' + matches);
 
           //TODO: try to parse price
           var courses = [];
@@ -111,13 +108,10 @@ exports.getMenus = function (restaurantName, callback) {
     };
   }
 
-  // function restaurantFactory(restaurantName, courses, callback) {
-  //   var restaurant = ( { name: restaurantName, courses: [] } );
-  //   courses.forEach(function (item) {
-  //     restaurant.courses.push( { name: item.title_fi } );
-  //   });
-  //
-  //   callback(restaurant);
-  // }
+  // returns MM.dd.yyyy
+  // and yes, we're deliberately leaving the trailing period off since it might not be there
+  function padDate(date) {
+    return ('0' + date.getDate()).slice(-2) + '.' + ('0' + (date.getMonth() + 1)).slice(-2);
+  }
 
 }

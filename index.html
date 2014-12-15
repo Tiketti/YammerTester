@@ -13,11 +13,17 @@
 	<body ng-controller="YCtrl">
 		<div class="container theme-showcase content" role="main">
 
-			<div class="yammerButton">
-				<span id="yammer-login"></span>
-			</div>
+			<div id="yammer-login"></div>
+			<script>
+				yam.connect.loginButton('#yammer-login', function (resp) {
+					if (resp.authResponse) {
+						document.getElementById('yammer-login').innerHTML = 'Logged in to Yammer';
+					}
+				});
+			</script>
 
 			<button type="button" class="btn btn-lg btn-success" ng-click="readMenus()">Read menus</button>
+			<button type="button" class="btn btn-lg btn-success" ng-click="postMenusToYammer()" ng-show="yammerPostEnabled">Post menus to Yammer</button>
 			<button type="button" class="btn btn-lg btn-success hidden" ng-click="readMessages()">Get messages from Yammer</button>
 
 			<div class="menus">
